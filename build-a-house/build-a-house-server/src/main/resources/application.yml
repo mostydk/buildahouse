@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Build a House Application
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+springdoc:
+  auto-tag-classes: false
+  api-docs:
+    path: /api/api-docs
+  swagger-ui:
+    layout: BaseLayout
+    path: /api/swagger-ui.html
+    operationsSorter: alpha
+    docExpansion: none

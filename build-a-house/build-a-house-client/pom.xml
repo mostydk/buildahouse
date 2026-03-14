@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.mosty</groupId>
+		<artifactId>build-a-house</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>build-a-house-client</artifactId>
+	<name>Build a House Client</name>
+	<description>Client side of Build a House based on J2CL</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.vertispan.j2cl</groupId>
+				<artifactId>j2cl-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<entrypoint>com.mosty.buildahouse.client.BuildAHouseApp</entrypoint>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.mosty</groupId>
+			<artifactId>build-a-house-shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.elemental2</groupId>
+			<artifactId>elemental2-dom</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
