@@ -19,6 +19,7 @@
 	</properties>
 
 	<modules>
+		<module>build-a-house-shared-shadow</module>
 		<module>build-a-house-shared</module>
 		<module>build-a-house-client</module>
 		<module>build-a-house-server</module>
@@ -29,6 +30,11 @@
 			<dependency>
 				<groupId>com.mosty</groupId>
 				<artifactId>build-a-house-shared</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mosty</groupId>
+				<artifactId>build-a-house-shared-shadow</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

@@ -9,10 +9,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>build-a-house-shared</artifactId>
-	<name>Build a House Shared</name>
-	<description>Code shared between Client and Server of Build a House</description>
-
+	<artifactId>build-a-house-shared-shadow</artifactId>
+	<name>Build a House Shared Shadow</name>
+	<description>Super Source code annotations user in shared code but should be ignores by client J2CL</description>
+	
 	<build>
 		<resources>
 			<resource>
@@ -24,15 +24,4 @@
 		</resources>
 	</build>
 
-	<dependencies>
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.mosty</groupId>
-			<artifactId>build-a-house-shared-shadow</artifactId>
-			<optional>true</optional>
-		</dependency>
-	</dependencies>
 </project>

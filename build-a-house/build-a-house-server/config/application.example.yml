@@ -3,3 +3,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/buildahouse
     username: db_user
     password: db_pass
+
+app:
+  dev-mode:
+    enabled: true
+    path: <absolute path to build-a-house-client generated output> 

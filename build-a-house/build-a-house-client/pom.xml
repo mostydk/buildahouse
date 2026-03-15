@@ -25,9 +25,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<entrypoint>com.mosty.buildahouse.client.BuildAHouseApp</entrypoint>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -36,6 +33,12 @@
 		<dependency>
 			<groupId>com.mosty</groupId>
 			<artifactId>build-a-house-shared</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>jakarta.validation</groupId>
+					<artifactId>jakarta.validation-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.elemental2</groupId>
