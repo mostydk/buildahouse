@@ -14,7 +14,7 @@ public class ProjectStateEntity {
 	@Column(name = "enum_name", unique = true, nullable = false, length = 50)
 	private String enumName;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	

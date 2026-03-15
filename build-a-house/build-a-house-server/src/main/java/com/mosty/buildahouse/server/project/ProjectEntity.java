@@ -26,7 +26,7 @@ public class ProjectEntity {
 	@JoinColumn(name = "state_id", nullable = false)
 	private ProjectStateEntity state;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

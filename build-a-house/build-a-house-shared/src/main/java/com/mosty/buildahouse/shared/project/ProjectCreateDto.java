@@ -1,9 +1,10 @@
 package com.mosty.buildahouse.shared.project;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class ProjectCreateDto {
-	@NotBlank
+	@NotBlank @Size(max = 200)
 	private String name;
 	
 	private String description;

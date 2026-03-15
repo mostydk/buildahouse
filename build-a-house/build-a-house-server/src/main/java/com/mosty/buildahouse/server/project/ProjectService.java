@@ -63,7 +63,7 @@ public class ProjectService {
 	}
 	
 	private ProjectStateEntity getStateEntity(ProjectStateEnum state) throws Exception {
-		Optional<ProjectStateEntity> entity = projectStateRepository.findByName(ProjectStateEnum.ACTIVE.name());
+		Optional<ProjectStateEntity> entity = projectStateRepository.findByEnumName(state.name());
 		if (entity.isEmpty())
 			throw new Exception("ProjectStateEnum is out of sync with database. Did you forget to update the entries in the database?");
 		
