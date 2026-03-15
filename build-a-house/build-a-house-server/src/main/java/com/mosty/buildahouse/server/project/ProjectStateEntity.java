@@ -9,21 +9,20 @@ import jakarta.persistence.Table;
 @Table(name = "project_state")
 public class ProjectStateEntity {
 	@Id
-	@Column(unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	
-	@Column(unique = true, nullable = false, length = 50)
-	private String name;
+	@Column(name = "enum_name", unique = true, nullable = false, length = 50)
+	private String enumName;
 
 	public int getId() {
 		return id;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getEnumName() {
+		return enumName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public void setEnumName(String enumName) {
+		this.enumName = enumName;
 	}
 }

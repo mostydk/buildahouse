@@ -1,9 +1,9 @@
 package com.mosty.buildahouse.shared.project;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 public class ProjectCreateDto {
-	@NotNull
+	@NotBlank
 	private String name;
 	
 	private String description;

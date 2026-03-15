@@ -5,7 +5,7 @@
 CREATE TABLE IF NOT EXISTS public.project_state
 (
     id integer NOT NULL,
-    name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    enum_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT project_state_pkey PRIMARY KEY (id)
 )
 
@@ -13,13 +13,13 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.project_state
     OWNER to buildahouse;
--- Index: uix_project_state_name
+-- Index: uix_project_state_enum_name
 
--- DROP INDEX IF EXISTS public.uix_project_state_name;
+-- DROP INDEX IF EXISTS public.uix_project_state_enum_name;
 
-CREATE UNIQUE INDEX IF NOT EXISTS uix_project_state_name
+CREATE UNIQUE INDEX IF NOT EXISTS uix_project_state_enum_name
     ON public.project_state USING btree
-    (name COLLATE pg_catalog."default" ASC NULLS LAST)
+    (enum_name COLLATE pg_catalog."default" ASC NULLS LAST)
     NULLS NOT DISTINCT
     WITH (fillfactor=100, deduplicate_items=True)
     TABLESPACE pg_default;

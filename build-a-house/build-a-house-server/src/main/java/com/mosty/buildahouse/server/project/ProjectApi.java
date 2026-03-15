@@ -6,15 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mosty.buildahouse.shared.project.ProjectCreateDto;
 import com.mosty.buildahouse.shared.project.ProjectDto;
 import com.mosty.buildahouse.shared.project.ProjectSummaryDto;
+import com.mosty.buildahouse.shared.project.ProjectUpdateDto;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -51,20 +52,20 @@ public interface ProjectApi {
 		@ApiResponse(responseCode = "500", description = "There was a problem creating the project", content = @Content())
 	})
 	@PostMapping(value = "/project", produces = "application/json", consumes = "application/json")
-	ResponseEntity<Long> createProject(@Valid @RequestBody(required = true) ProjectCreateDto project);
+	ResponseEntity<ProjectDto> createProject(@Valid @RequestBody(required = true) ProjectCreateDto project) throws Exception;
 	
 	@Operation(operationId = "updateProject", tags = { "Project" }, summary = "Update details of a project", description = "Update details of a project.")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Project updated succesfully"),
+		@ApiResponse(responseCode = "204", description = "Project updated succesfully"),
 		@ApiResponse(responseCode = "404", description = "Project couldn't be found", content = @Content()),
 		@ApiResponse(responseCode = "500", description = "There was a problem updating the project", content = @Content())
 	})
-	@PatchMapping(value = "/project/{id}", consumes = "application/json")
-	ResponseEntity<Void> updateProject(@Parameter(description = "ID of the project") @PathVariable("id") long id, @Valid @RequestBody(required = true) ProjectDto project);
+	@PutMapping(value = "/project/{id}", consumes = "application/json")
+	ResponseEntity<Void> updateProject(@Parameter(description = "ID of the project") @PathVariable("id") long id, @Valid @RequestBody(required = true) ProjectUpdateDto project) throws Exception;
 	
 	@Operation(operationId = "deleteProject", tags = { "Project" }, summary = "Delete a project", description = "Delete a project.")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Project deleted succesfully"),
+		@ApiResponse(responseCode = "204", description = "Project deleted succesfully"),
 		@ApiResponse(responseCode = "404", description = "Project couldn't be found", content = @Content()),
 		@ApiResponse(responseCode = "500", description = "There was a problem deleting the project", content = @Content())
 	})

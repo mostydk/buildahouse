@@ -1,18 +1,17 @@
 package com.mosty.buildahouse.shared.project;
 
-public class ProjectDto {
-	private long id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public class ProjectUpdateDto {
+	@NotBlank @Size(max = 200)
 	private String name;
+	
 	private String description;
+	
+	@NotNull
 	private ProjectStateEnum state;
-	
-	public long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
-	}
 	
 	public String getName() {
 		return name;

@@ -14,8 +14,7 @@ import jakarta.persistence.Table;
 public class ProjectEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
-	private long id;
+	private Long id;
 	
 	@Column(unique = true, nullable = false, length = 200)
 	private String name;

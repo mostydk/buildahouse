@@ -5,28 +5,26 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.mosty.buildahouse.shared.project.ProjectCreateDto;
 import com.mosty.buildahouse.shared.project.ProjectDto;
-import com.mosty.buildahouse.shared.project.ProjectStateEnum;
 import com.mosty.buildahouse.shared.project.ProjectSummaryDto;
+import com.mosty.buildahouse.shared.project.ProjectUpdateDto;
 
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
 public class ProjectApiController implements ProjectApi {
-	private final ProjectRepository projectRepository;
-	private final ProjectStateRepository projectStateRepository;
+	private ProjectService projectService;
 	
-	public ProjectApiController(ProjectRepository projectRepository, ProjectStateRepository projectStateRepository) {
-		this.projectRepository = projectRepository; 
-		this.projectStateRepository = projectStateRepository;
+	public ProjectApiController(ProjectService projectService) {
+		this.projectService = projectService;
 	}
 	
 	@Override
 	public ResponseEntity<List<ProjectSummaryDto>> getProjects() {
-		List<ProjectSummaryDto> projects = projectRepository.findAll().stream()
+		List<ProjectSummaryDto> projects = projectService.getProjects().stream()
 				.map(project -> ProjectMapper.INSTANCE.projectEntityToSummaryDto(project)).toList();
 		
 		return new ResponseEntity<>(projects, HttpStatus.OK);
@@ -34,7 +32,7 @@ public class ProjectApiController implements ProjectApi {
 	
 	@Override
 	public ResponseEntity<ProjectDto> getProject(long id) {
-		Optional<ProjectEntity> entity = projectRepository.findById(id);
+		Optional<ProjectEntity> entity = projectService.getProject(id);
 		
 		if (entity.isEmpty())
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -43,45 +41,25 @@ public class ProjectApiController implements ProjectApi {
 	}
 	
 	@Override
-	public ResponseEntity<Long> createProject(@Valid ProjectCreateDto project) {
-		ProjectStateEntity state = projectStateRepository.findByName(ProjectStateEnum.ACTIVE.name()).orElse(null);
+	public ResponseEntity<ProjectDto> createProject(@Valid ProjectCreateDto project) throws Exception {
+		ProjectEntity entity = projectService.createProject(project);
 		
-		ProjectEntity entity = ProjectMapper.INSTANCE.projectUpdateDtoToEntity(project);
-		entity.setState(state);
-		
-		entity = projectRepository.save(entity);
-		
-		return new ResponseEntity<>(entity.getId(), HttpStatus.CREATED);
+		return new ResponseEntity<>(ProjectMapper.INSTANCE.projectEntityToDto(entity), HttpStatus.CREATED);
 	}
 	
 	@Override
-	public ResponseEntity<Void> updateProject(long id, @Valid ProjectDto project) {
-		ProjectEntity entity = projectRepository.findById(id).orElse(null);
-		
-		if (entity == null)
+	public ResponseEntity<Void> updateProject(long id, @Valid ProjectUpdateDto project) throws Exception {
+		if (projectService.updateProject(id, project))
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		
-		entity.setName(project.getName());
-		entity.setDescription(project.getDescription());
-		if (ProjectStateEnum.valueOf(entity.getState().getName()) != project.getState()) {
-			ProjectStateEntity state = projectStateRepository.findByName(project.getState().name()).orElse(null);
-			entity.setState(state);
-		}
-		
-		projectRepository.save(entity);
-		
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@Override
 	public ResponseEntity<Void> deleteProject(long id) {
-		Optional<ProjectEntity> entity = projectRepository.findById(id);
-		
-		if (entity.isEmpty())
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if (projectService.deleteProject(id))
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		else
-			projectRepository.delete(entity.get());
-		
-		return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }
