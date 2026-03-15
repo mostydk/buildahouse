@@ -27,6 +27,7 @@ public class ProjectPage extends BaseMElement<ProjectPage, HTMLDivElement> imple
 								.element()))
 				.addColumn(Column.<ProjectSummaryDto>create()
 						.setTitle("Name")
+						.setGrow(true)
 						.setColumnRenderer(project -> div()
 								.setTextContent(project.getName())
 								.element()))

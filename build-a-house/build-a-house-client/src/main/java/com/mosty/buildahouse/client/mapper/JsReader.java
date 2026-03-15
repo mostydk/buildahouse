@@ -21,7 +21,7 @@ public abstract class JsReader {
 	
     public static Long getLong(JsPropertyMap<?> map, String key) {
         Object val = map.get(key);
-        return val == null ? 0L : (long) Js.asDouble(val);
+        return val == null ? null : (long) Js.asDouble(val);
     }
 
     public static <E extends Enum<E>> E getEnum(JsPropertyMap<?> map, String key, Function<String, E> enumLookup) {

@@ -26,6 +26,10 @@ body {
 	flex-direction: column;
 }
 
+.flex-column-grow {
+	flex-grow: 1;
+}
+
 .flex-header {
 	display: flex;
 	font-weight: bold;
@@ -35,3 +39,4 @@ body {
 .flex-cell {
 	padding: 2px 4px 2px 4px; 
 }
+

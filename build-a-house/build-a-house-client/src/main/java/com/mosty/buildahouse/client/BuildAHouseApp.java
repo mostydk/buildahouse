@@ -9,10 +9,13 @@ import jsinterop.annotations.JsType;
 @JsType
 public class BuildAHouseApp {
 	public void onModuleLoad() {
-		HTMLDivElement rootDiv = (HTMLDivElement) DomGlobal.document.getElementById("app");
+		HTMLDivElement rootElement = (HTMLDivElement) DomGlobal.document.getElementById("app");
+		if (rootElement == null) {
+			DomGlobal.console.log("index.html is missing div element with 'app' id!");
+			return;
+		}
 		
-		DivElement root = DivElement.of(rootDiv);
-		
-		root.appendChild(new ProjectPage());
+		DivElement.of(rootElement)
+				.appendChild(new ProjectPage());
 	}
 }

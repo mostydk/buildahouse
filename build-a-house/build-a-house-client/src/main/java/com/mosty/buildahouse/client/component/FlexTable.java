@@ -73,6 +73,9 @@ public class FlexTable<T> extends BaseMElement<FlexTable<T>, HTMLDivElement> imp
 					.appendChild(div()
 							.addCss("flex-header")
 							.setTextContent(column.title)));
+			
+			if (column.grow)
+				column.columnDiv.addCss("flex-column-grow");
 		}
 		
 		for (T rowData : data) {
