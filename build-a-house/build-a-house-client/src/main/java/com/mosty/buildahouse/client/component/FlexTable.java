@@ -47,7 +47,7 @@ public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> i
 	
 	public FlexTable() {
 		root = div()
-				.addCss("flex-table");
+				.addCss("mui-flex-table");
 	}
 	
 	public FlexTable<T> addColumn(Column<T> column) {
@@ -69,19 +69,19 @@ public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> i
 		
 		for (Column<T> column : columns) {
 			root.appendChild(column.columnDiv = div()
-					.addCss("flex-column")
+					.addCss("mui-flex-table-column")
 					.appendChild(div()
-							.addCss("flex-header")
+							.addCss("mui-flex-table-header")
 							.setTextContent(column.title)));
 			
 			if (column.grow)
-				column.columnDiv.addCss("flex-column-grow");
+				column.columnDiv.addCss("mui-flex-grow");
 		}
 		
 		for (T rowData : data) {
 			for (Column<T> column : columns) {
 				column.columnDiv.appendChild(div()
-						.addCss("flex-cell")
+						.addCss("mui-flex-table-cell")
 						.appendChild(column.columnRenderer.apply(rowData)));
 			}
 		}

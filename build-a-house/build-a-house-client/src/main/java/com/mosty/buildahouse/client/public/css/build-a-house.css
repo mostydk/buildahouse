@@ -19,26 +19,25 @@ body {
   font-size: 16px;
 }
 
-.flex-table {
+.mui-flex-table {
 	display: flex;
 }
 
-.flex-column {
+.mui-flex-table-column {
 	display: flex;
 	flex-direction: column;
 }
 
-.flex-column-grow {
-	flex-grow: 1;
-}
-
-.flex-header {
+.mui-flex-table-header {
 	display: flex;
 	font-weight: bold;
 	padding: 2px 4px 2px 4px;
 }
 
-.flex-cell {
+.mui-flex-table-cell {
 	padding: 2px 4px 2px 4px; 
 }
 
+.mui-flex-grow {
+	flex-grow: 1;
+}
