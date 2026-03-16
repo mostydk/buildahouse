@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.mosty.buildahouse.client.element.BaseElement.DivElement;
-import com.mosty.buildahouse.client.element.BaseMElement;
+import com.mosty.buildahouse.client.element.BaseMUIElement;
 import com.mosty.buildahouse.client.element.ElementsFactory;
 
 import elemental2.dom.Element;
 import elemental2.dom.HTMLDivElement;
 
-public class FlexTable<T> extends BaseMElement<FlexTable<T>, HTMLDivElement> implements ElementsFactory {
+public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> implements ElementsFactory {
 	public static class Column<T> {
 		private String title;
 		private Function<T, Element> columnRenderer;

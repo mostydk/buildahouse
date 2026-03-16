@@ -3,7 +3,7 @@ package com.mosty.buildahouse.client.element;
 import elemental2.dom.Element;
 import elemental2.dom.HTMLDivElement;
 
-public abstract class BaseElement<T extends BaseElement<T, E>, E extends Element> extends BaseMElement<T, E> {
+public abstract class BaseElement<T extends BaseElement<T, E>, E extends Element> extends BaseMUIElement<T, E> {
 	private E element;
 	
 	@SuppressWarnings("unchecked")

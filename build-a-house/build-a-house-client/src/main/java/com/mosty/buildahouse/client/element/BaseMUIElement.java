@@ -3,7 +3,7 @@ package com.mosty.buildahouse.client.element;
 import elemental2.dom.Element;
 import elemental2.dom.Node;
 
-public abstract class BaseMElement<T extends BaseMElement<T, E>, E extends Element> {
+public abstract class BaseMUIElement<T extends BaseMUIElement<T, E>, E extends Element> {
 	private T mElement;
 	public abstract E element();
 	
@@ -11,7 +11,7 @@ public abstract class BaseMElement<T extends BaseMElement<T, E>, E extends Eleme
 		this.mElement = mElement;
 	}
 	
-	public T appendChild(BaseMElement<?, ?> mElement) {
+	public T appendChild(BaseMUIElement<?, ?> mElement) {
 		element().appendChild(mElement.element());
 		return this.mElement;
 	}
