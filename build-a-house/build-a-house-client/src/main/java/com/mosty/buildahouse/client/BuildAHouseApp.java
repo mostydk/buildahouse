@@ -11,7 +11,7 @@ public class BuildAHouseApp {
 	public void onModuleLoad() {
 		HTMLDivElement rootElement = (HTMLDivElement) DomGlobal.document.getElementById("app");
 		if (rootElement == null) {
-			DomGlobal.console.log("index.html is missing div element with 'app' id!");
+			DomGlobal.console.error("index.html is missing div element with 'app' id!");
 			return;
 		}
 		

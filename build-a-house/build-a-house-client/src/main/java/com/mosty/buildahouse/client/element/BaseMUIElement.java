@@ -1,43 +1,72 @@
 package com.mosty.buildahouse.client.element;
 
 import elemental2.dom.Element;
-import elemental2.dom.Node;
+import elemental2.dom.EventListener;
 
 public abstract class BaseMUIElement<T extends BaseMUIElement<T, E>, E extends Element> {
-	private T mElement;
+	private T muiElement;
 	public abstract E element();
 	
 	public void init(T mElement) {
-		this.mElement = mElement;
+		this.muiElement = mElement;
 	}
 	
 	public T appendChild(BaseMUIElement<?, ?> mElement) {
-		element().appendChild(mElement.element());
-		return this.mElement;
+		getAppendTarget().appendChild(mElement.element());
+		return this.muiElement;
 	}
 
 	public T appendChild(Element element) {
-		element().appendChild(element);
-		return mElement;
+		getAppendTarget().appendChild(element);
+		return muiElement;
 	}
 	
-	public T setTextContent(String text) {
+	public T hide() {
+		element().classList.add("mui-hidden");
+		return muiElement;
+	}
+	
+	public T show() {
+		element().classList.remove("mui-hidden");
+		return muiElement;
+	}
+	
+	public T textContent(String text) {
 		element().textContent = text;
-		return mElement;
+		return muiElement;
 	}
 	
 	public T clearElement() {
 		Element element = element();
 		
-		for (Node child : element.childNodes.asList()) {
-			element.removeChild(child);
+		while (element.firstChild != null) {
+			element.removeChild(element.firstChild);
 		}
 		
-		return mElement;
+		return muiElement;
 	}
 	
-	public T addCss(String cls) {
+	public T setStyle(String style) {
+		element().setAttribute("style", style);
+		return muiElement;
+	}
+	
+	public T addCss(String... cls) {
 		element().classList.add(cls);
-		return mElement;
+		return muiElement;
+	}
+	
+	public T addClickLister(EventListener listener) {
+		element().addEventListener("click", listener);
+		return muiElement;
+	}
+	
+	public T removeClickLister(EventListener listener) {
+		element().removeEventListener("click", listener);
+		return muiElement;
+	}
+	
+	protected Element getAppendTarget() {
+		return element();
 	}
 }

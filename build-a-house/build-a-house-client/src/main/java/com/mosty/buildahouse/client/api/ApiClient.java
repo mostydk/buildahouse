@@ -21,7 +21,7 @@ public class ApiClient {
 		return DomGlobal.fetch(path, request)
 		.then(response -> {
 			if (response.status < 200 || response.status >= 300)
-				return Promise.reject("Received status code " + response.status);
+				return Promise.reject("Received status code " + response.status); //temp
 			
 			return response.json();
 		}).then(json -> {
@@ -42,7 +42,7 @@ public class ApiClient {
 		return DomGlobal.fetch(path, request)
 		.then(response -> {
 			if (!response.ok)
-				return Promise.reject("Received status code " + response.status);
+				return Promise.reject("Received status code " + response.status); //temp
 			
 			return response.json();
 		})
@@ -63,7 +63,7 @@ public class ApiClient {
 		return DomGlobal.fetch(path, request)
 		.then(response -> {
 			if (!response.ok)
-				return Promise.reject("Received status code " + response.status);
+				return Promise.reject("Received status code " + response.status); //temp
 			
 			return Promise.resolve((Void)null);
 		});
@@ -76,7 +76,7 @@ public class ApiClient {
 		return DomGlobal.fetch(path, request)
 		.then(response -> {
 			if (!response.ok)
-				return Promise.reject("Received status code " + response.status);
+				return Promise.reject("Received status code " + response.status); //temp
 			
 			return Promise.resolve((Void)null);
 		});

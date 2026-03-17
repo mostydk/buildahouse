@@ -11,12 +11,11 @@ import com.mosty.buildahouse.client.element.ElementsFactory;
 import elemental2.dom.Element;
 import elemental2.dom.HTMLDivElement;
 
-public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> implements ElementsFactory {
+public class GridTable<T> extends BaseMUIElement<GridTable<T>, HTMLDivElement> implements ElementsFactory {
 	public static class Column<T> {
 		private String title;
 		private Function<T, Element> columnRenderer;
 		private boolean grow = false;
-		private DivElement columnDiv;
 		
 		public static <T> Column<T> create() {
 			return new Column<T>();
@@ -27,7 +26,7 @@ public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> i
 			return this;
 		}
 		
-		public Column<T> setColumnRenderer(Function<T, Element> columnRenderer) {
+		public Column<T> setCellRenderer(Function<T, Element> columnRenderer) {
 			this.columnRenderer = columnRenderer;
 			return this;
 		}
@@ -41,16 +40,16 @@ public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> i
 	private DivElement root;
 	private List<Column<T>> columns = new ArrayList<>();
 	
-	public static <T> FlexTable<T> create() {
-		return new FlexTable<T>();
+	public static <T> GridTable<T> create() {
+		return new GridTable<T>();
 	}
 	
-	public FlexTable() {
+	public GridTable() {
 		root = div()
 				.addCss("mui-flex-table");
 	}
 	
-	public FlexTable<T> addColumn(Column<T> column) {
+	public GridTable<T> addColumn(Column<T> column) {
 		columns.add(column);
 		return this;
 	}
@@ -66,24 +65,34 @@ public class FlexTable<T> extends BaseMUIElement<FlexTable<T>, HTMLDivElement> i
 	
 	private void renderTable(List<T> data) {
 		root.clearElement();
+		root.setStyle("grid-template-columns: " + generateGridTemplateColumns() + ";");
 		
 		for (Column<T> column : columns) {
-			root.appendChild(column.columnDiv = div()
-					.addCss("mui-flex-table-column")
-					.appendChild(div()
-							.addCss("mui-flex-table-header")
-							.setTextContent(column.title)));
+			root.appendChild(div()
+					.addCss("mui-flex-table-header")
+					.textContent(column.title));
 			
-			if (column.grow)
-				column.columnDiv.addCss("mui-flex-grow");
 		}
 		
 		for (T rowData : data) {
 			for (Column<T> column : columns) {
-				column.columnDiv.appendChild(div()
+				root.appendChild(div()
 						.addCss("mui-flex-table-cell")
 						.appendChild(column.columnRenderer.apply(rowData)));
 			}
 		}
+	}
+	
+	private String generateGridTemplateColumns() {
+		StringBuilder sb = new StringBuilder();
+		
+		for (Column<T> column : columns) {
+			if (column.grow)
+				sb.append("minmax(0, 1fr) ");
+			else
+				sb.append("minmax(0, auto) ");
+		}
+		
+		return sb.toString();
 	}
 }

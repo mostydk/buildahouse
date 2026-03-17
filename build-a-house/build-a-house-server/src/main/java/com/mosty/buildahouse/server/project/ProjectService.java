@@ -3,6 +3,7 @@ package com.mosty.buildahouse.server.project;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.mosty.buildahouse.shared.project.ProjectCreateDto;
@@ -20,7 +21,7 @@ public class ProjectService {
 	}
 	
 	public List<ProjectEntity> getProjects() {
-		return projectRepository.findAll();
+		return projectRepository.findAll(Sort.by("id"));
 	}
 	
 	public Optional<ProjectEntity> getProject(long id) {
